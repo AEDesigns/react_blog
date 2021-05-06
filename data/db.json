@@ -1,0 +1,23 @@
+{
+    "blogs":[
+
+        {
+            "title": "Blog Number 1",
+            "body": "First blog test data",
+            "author": "Andrew",
+            "id": 1
+        },
+        {
+            "title": "Blog Number 2",
+            "body": "Second blog test data",
+            "author": "Andrew",
+            "id": 2
+        },
+        {
+            "title": "Blog Number 3",
+            "body": "Third blog test data",
+            "author": "Crystal",
+            "id": 3
+        }
+    ]
+}
