@@ -1,29 +1,40 @@
-import {useState, useEffect} from 'react';
-import BlogList from './blogList';
+import { useEffect, useState } from "react";
+import BlogList from "./blogList"
 
 const Home = () => {
+  const [blogs, setBlogs] = useState([])
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null)
 
-    const [blogs, setBlogs] = useState(null);
-
-    useEffect(() => {
-        // Fetch Data
-        fetch('http://localhost:8000/blogs')
-        .then(res => {
-            //format data to json
-            return res.json()
+  useEffect(() => {
+    setTimeout(() => {
+      fetch('http://localhost:8000/blogs')
+        .then((res) => {
+          if(!res.ok){
+            throw Error('Could Not Fetch Data')
+          } else {
+            return res.json();
+          }
         })
         .then(data => {
-            //setState to data from fetch call
-            setBlogs(data)
+          setBlogs(data)
+          setIsLoading(false)
+          setError(null)
         })
-    }, []);
+        .catch(err => {
+          setIsLoading(false)
+          setError(err.message)
+        })
+    }, 1500)
+  }, [])
 
-    return ( 
-        <div className="home">
-            {/* BllogList wont render until blogs is true, when the api finishes */}
-            {blogs && <BlogList blogs={blogs} title="All Blogs"/>}
-        </div>
-     );
+  return (
+    <div className="home">
+      {error && <div>{error}</div>}
+      {isLoading && <div>Loading....</div>}
+      {blogs && <BlogList blogs={blogs} title="All Blogs" />}
+    </div>
+  );
 }
  
 export default Home;
