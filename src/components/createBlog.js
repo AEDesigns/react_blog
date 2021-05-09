@@ -1,5 +1,23 @@
 import { useState } from "react";
 import {useHistory} from 'react-router-dom';
+import {TextField, makeStyles, Typography, Button} from '@material-ui/core'
+import { PlayCircleFilledWhite } from "@material-ui/icons";
+
+const useStyles = makeStyles({
+    field: {
+        marginTop: 20,
+        marginBottom: 20,
+        display: 'block'
+    },
+    btn: {
+        fontSize: 18,
+        variant: 'contained',
+        '&:hover': {
+            backgroundColor: 'red'
+        },
+    }
+})
+
 
 const Create = () => {
     const [title, setTitle] = useState('')
@@ -7,6 +25,8 @@ const Create = () => {
     const [author, setAuthor] = useState('Mario');
     const [isPending, setIsPending] = useState(false);
     const history = useHistory();
+
+    const classes = useStyles();
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -25,21 +45,38 @@ const Create = () => {
 
     return ( 
         <div className="create">
-            <h2>Add a New Blog</h2>
-            <form onSubmit={handleSubmit}>
-                <label>Blog title:</label>
-                <input 
-                type="text"
-                required 
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
+            <Typography
+                variant="h2"
+                color="primary"
+            >
+                Add a New Blog
+            </Typography>
+            <form
+            noValidate
+            autoComplete="off"
+            >
+                <TextField
+                    label="Blog Title"
+                    color="secondary"
+                    fullWidth
+                    multiline
+                    rows={2}
+                    required
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
                 />
-                <label>Blog body:</label>
-                <textarea 
-                required
-                value={body}
-                onChange={(e) => setBody(e.target.value)}
-                ></textarea>
+                <TextField
+                    className={classes.field}
+                    label="Blog Body"
+                    variant="outlined"
+                    color="secondary"
+                    fullWidth
+                    multiline
+                    rows={6}
+                    required
+                    value={body}
+                    onChange={(e) => setBody(e.target.value)}
+                />
                 <label>Blog Author:</label>
                 <select
                     value={author}
@@ -48,8 +85,17 @@ const Create = () => {
                     <option value="mario">Mario</option>
                     <option value="luigi">Luigi</option>
                 </select>
-                {!isPending &&<button>Add Blog</button>}
-                {isPending &&<button disabled>Adding blog</button>}
+                {!isPending &&
+                    <Button
+                        className={classes.btn}
+                        color="primary"
+                        variant="contained"
+                        onClick={handleSubmit}
+                    >
+                        Add Blog
+                    </Button>
+                }
+                {isPending &&<Button disabled>Adding blog</Button>}
             </form>
         </div>
      );

@@ -8,7 +8,6 @@ import {makeStyles} from '@material-ui/core';
 const useStyles = makeStyles({
     btn: {
         fontSize: 18,
-        backgroundColor: 'purple',
         '&:hover': {
             backgroundColor: 'red'
         }
@@ -46,14 +45,14 @@ const BlogDetails = () => {
                     className={classes.title}
                     variant="h2" 
                     component="h2"
-                    color="primary"
+                    color="secondary"
                     align="left"
                 >
                     {blog.title}
                 </Typography>
                 <Typography
                     variant="h4"
-                    color="secondary"
+                    color="error"
                     align="left"
                 >
                     Written By: {blog.author}
@@ -65,7 +64,7 @@ const BlogDetails = () => {
                 </Typography>
                 <Button
                     className={classes.btn}
-                    color="secondary"
+                    color="primary"
                     variant="contained"
                     onClick={handleClick}
                     startIcon={
