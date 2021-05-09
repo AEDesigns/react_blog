@@ -1,5 +1,7 @@
 import { useParams, useHistory } from "react-router-dom";
 import useFetch from "../useFetch";
+import {Typography, Button, Container} from '@material-ui/core';
+
 
 const BlogDetails = () => {
     const {id} = useParams();
@@ -20,12 +22,35 @@ const BlogDetails = () => {
             {isLoading && <div>Blog is loading...</div>}
             {error && <div>{error}</div>}
             {blog && (
-                <article>
-                    <h2>{blog.title}</h2>
-                    <p>Written By: {blog.author}</p>
-                    <p>{blog.body}</p>
-                    <button onClick={handleClick}>Delete</button>
-                </article>
+                <Container className="classes.root">
+                <Typography 
+                    variant="h2" 
+                    component="h2"
+                    color="primary"
+                    align="left"
+                >
+                    {blog.title}
+                </Typography>
+                <Typography
+                    variant="h4"
+                    color="secondary"
+                    align="left"
+                >
+                    Written By: {blog.author}
+                </Typography>
+                <Typography
+                    variant="body1"
+                >
+                    {blog.body}
+                </Typography>
+                <Button
+                    color="secondary"
+                    variant="contained"
+                    onClick={handleClick}
+                >
+                    Delete
+                </Button>
+                </Container>
             )}
         </div>
      );

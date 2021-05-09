@@ -1,11 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Girassol&display=swap');
 
-* {
-  margin: 0;
-  font-family: 'Girassol', 'sans-serif';
-  color: #333;
-}
-
 .navbar {
   padding: 20px;
   display: flex;
@@ -61,21 +55,6 @@
 
 .blog-preview a:hover {
   text-decoration: underline;
-}
-
-/* Blog Details Page */
-
-.blog-details div {
-  margin: 20px 0;
-}
-
-.blog-details button {
-  background: #f1356d;
-  color: #fff;
-  border: 0;
-  padding: 8px;
-  border-radius: 8px;
-  cursor: pointer;
 }
 
 /* Create New Blog Form */
