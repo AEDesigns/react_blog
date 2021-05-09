@@ -13,25 +13,29 @@ const useStyles = makeStyles({
         fontSize: 18,
         variant: 'contained',
         '&:hover': {
-            backgroundColor: 'red'
+            backgroundColor: 'green'
         },
     }
 })
 
 
 const Create = () => {
-    const [title, setTitle] = useState('')
-    const [body, setBody] = useState('')
+    const [title, setTitle] = useState('');
+    const [body, setBody] = useState('');
     const [author, setAuthor] = useState('Mario');
     const [isPending, setIsPending] = useState(false);
+    const [titleError, setTitleError] = useState(false);
+    const [bodyError, setBodyError] = useState(false);
+
     const history = useHistory();
 
     const classes = useStyles();
 
-    const handleSubmit = (e) => {
+    function handleSubmit(e){
         e.preventDefault();
         const blog = {title, body, author};
         setIsPending(true)
+
         fetch('http://localhost:8000/blogs', {
             method: 'POST',
             headers: {"Content-Type": "application/json"},
@@ -41,6 +45,19 @@ const Create = () => {
             setIsPending(false)
             history.push('/');
         })
+    };
+
+    function handleError(e){
+        setTitleError(false);
+        setBodyError(false);
+        
+        if(title === '' ){
+            setTitleError(true);
+        } else if (body === '') {
+            setBodyError(true);
+        } else {
+            handleSubmit(e)
+        }
     }
 
     return ( 
@@ -64,6 +81,7 @@ const Create = () => {
                     required
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
+                    error={handleError}
                 />
                 <TextField
                     className={classes.field}
@@ -75,6 +93,7 @@ const Create = () => {
                     rows={6}
                     required
                     value={body}
+                    error={bodyError}
                     onChange={(e) => setBody(e.target.value)}
                 />
                 <label>Blog Author:</label>
@@ -90,7 +109,7 @@ const Create = () => {
                         className={classes.btn}
                         color="primary"
                         variant="contained"
-                        onClick={handleSubmit}
+                        onClick={handleError}
                     >
                         Add Blog
                     </Button>
