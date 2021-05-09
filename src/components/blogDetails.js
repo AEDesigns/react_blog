@@ -1,7 +1,7 @@
 import { useParams, useHistory } from "react-router-dom";
 import useFetch from "../useFetch";
 import {Typography, Button, Container} from '@material-ui/core';
-
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 
 const BlogDetails = () => {
     const {id} = useParams();
@@ -47,6 +47,11 @@ const BlogDetails = () => {
                     color="secondary"
                     variant="contained"
                     onClick={handleClick}
+                    startIcon={
+                        <DeleteForeverIcon
+                        fontSize="small"
+                    />
+                    }
                 >
                     Delete
                 </Button>
