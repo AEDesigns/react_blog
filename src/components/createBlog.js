@@ -1,7 +1,6 @@
 import { useState } from "react";
 import {useHistory} from 'react-router-dom';
 import {TextField, makeStyles, Typography, Button} from '@material-ui/core'
-import { PlayCircleFilledWhite } from "@material-ui/icons";
 
 const useStyles = makeStyles({
     field: {
@@ -81,7 +80,7 @@ const Create = () => {
                     required
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
-                    error={handleError}
+                    error={titleError}
                 />
                 <TextField
                     className={classes.field}

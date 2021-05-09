@@ -1,18 +1,24 @@
 import { Link } from "react-router-dom";
+import {Container, Grid, Paper, Typography} from '@material-ui/core';
+import NoteCard from '../components/noteCard';
 
 const BlogList = ({ blogs, title }) => {
     return (
-      <div className="blog-list">
-        <h2>{ title }</h2>
-        {blogs.map(blog => (
-          <div className="blog-preview" key={blog.id} >
-            <Link to={`/blogs/${blog.id}`}>
-              <h2>{ blog.title }</h2>
-            </Link>
-            <p>Written by { blog.author }</p>
-          </div>
-        ))}
-      </div>
+      <Container className="blog-list">
+        <Typography
+          variant="h1"
+          color="primary"
+        >
+          Blogs:
+        </Typography>
+        <Grid container spacing={3}>
+            {blogs.map(blog => (
+              <Grid item lg={4} md={6} xs={12}>
+                <NoteCard blog={blog}/>
+              </Grid>
+            ))}
+        </Grid>
+      </Container>
     );
   }
    
