@@ -2,8 +2,27 @@ import { useParams, useHistory } from "react-router-dom";
 import useFetch from "../useFetch";
 import {Typography, Button, Container} from '@material-ui/core';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import {makeStyles} from '@material-ui/core';
+
+
+const useStyles = makeStyles({
+    btn: {
+        fontSize: 18,
+        backgroundColor: 'purple',
+        '&:hover': {
+            backgroundColor: 'red'
+        }
+    },
+    title: {
+        textDecoration: "underline",
+        marginBottom: 10
+    }
+})
+
+
 
 const BlogDetails = () => {
+    const classes = useStyles();
     const {id} = useParams();
     const {data: blog, error, isLoading} = useFetch('http://localhost:8000/blogs/' + id);
     const history = useHistory();
@@ -24,6 +43,7 @@ const BlogDetails = () => {
             {blog && (
                 <Container className="classes.root">
                 <Typography 
+                    className={classes.title}
                     variant="h2" 
                     component="h2"
                     color="primary"
@@ -44,6 +64,7 @@ const BlogDetails = () => {
                     {blog.body}
                 </Typography>
                 <Button
+                    className={classes.btn}
                     color="secondary"
                     variant="contained"
                     onClick={handleClick}
